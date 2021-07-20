@@ -3,19 +3,13 @@ import { expect } from 'chai';
 import {
   afterEach, beforeEach, describe, it,
 } from 'mocha';
-import { CosmosClient, Database } from '@azure/cosmos';
 import { UserController } from '../src/controllers/UserController';
-import { usersCollection } from '../src/database';
 import { requestMock } from './mocks/requestMock';
 import { responseMock } from './mocks/responseMock';
 import { userMock, usersMock } from './mocks/userMock';
+import { usersCollectionMock } from './mocks/userCollectionMock';
 
-const userController = new UserController();
-
-const CosmosClientMock = sinon.createStubInstance(CosmosClient);
-CosmosClientMock.database.callsFake(() => (
-  { container: () => usersCollection } as unknown as Database
-));
+const userController = new UserController(usersCollectionMock);
 
 describe('User Controller', () => {
   let sandbox: sinon.SinonSandbox;
@@ -39,7 +33,7 @@ describe('User Controller', () => {
 
   describe('index', () => {
     beforeEach(() => {
-      queryMock = sandbox.stub(usersCollection.items, 'query');
+      queryMock = sandbox.stub(usersCollectionMock.items, 'query');
     });
 
     it('should return array of users', async () => {
@@ -56,7 +50,7 @@ describe('User Controller', () => {
 
   describe('indexById', () => {
     beforeEach(() => {
-      itemMock = sandbox.stub(usersCollection, 'item');
+      itemMock = sandbox.stub(usersCollectionMock, 'item');
     });
 
     it('should return user successfully', async () => {
@@ -86,8 +80,8 @@ describe('User Controller', () => {
 
   describe('create', () => {
     beforeEach(() => {
-      queryMock = sandbox.stub(usersCollection.items, 'query');
-      createUserMock = sandbox.stub(usersCollection.items, 'create');
+      queryMock = sandbox.stub(usersCollectionMock.items, 'query');
+      createUserMock = sandbox.stub(usersCollectionMock.items, 'create');
     });
 
     it('should be create user sucessfully', async () => {
@@ -137,7 +131,7 @@ describe('User Controller', () => {
 
   describe('delete', () => {
     beforeEach(() => {
-      itemMock = sandbox.stub(usersCollection, 'item');
+      itemMock = sandbox.stub(usersCollectionMock, 'item');
     });
 
     it('should delete user successfully', async () => {
@@ -168,7 +162,7 @@ describe('User Controller', () => {
 
   describe('update', () => {
     beforeEach(() => {
-      itemMock = sandbox.stub(usersCollection, 'item');
+      itemMock = sandbox.stub(usersCollectionMock, 'item');
     });
 
     it('should udpate user successfully with data provided in request body', async () => {
