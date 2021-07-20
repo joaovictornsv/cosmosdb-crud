@@ -14,5 +14,5 @@ export const usersMock = [
 export const userMock = {
   id: 'id-mock',
   name: 'name-mock',
-  email: 'username-mock',
+  email: 'email-mock',
 };

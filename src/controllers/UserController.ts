@@ -69,6 +69,10 @@ class UserController {
 
     const userData = req.body;
 
+    if (!userData) {
+      return res.status(200).json({ message: `No data provided to update. User with id ${id} remains unchanged`, user: resource });
+    }
+
     const { resource: user } = await usersCollection.item(id)
       .replace({
         name: userData.name || resource.name,
