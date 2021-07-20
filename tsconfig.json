@@ -1,0 +1,22 @@
+ 
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": ["es6"],                                   
+    "allowJs": true,
+    "typeRoots": ["./app/src/types"],
+    "types": ["mocha", "express"],
+    "removeComments": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "./__tests__/",
+    "./node_modules/",
+    "./dist/"
+  ],
+}
