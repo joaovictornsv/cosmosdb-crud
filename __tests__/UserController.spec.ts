@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import {
   afterEach, beforeEach, describe, it,
 } from 'mocha';
+import { CosmosClient, Database } from '@azure/cosmos';
 import { UserController } from '../src/controllers/UserController';
 import { usersCollection } from '../src/database';
 import { requestMock } from './mocks/requestMock';
@@ -10,6 +11,11 @@ import { responseMock } from './mocks/responseMock';
 import { userMock, usersMock } from './mocks/userMock';
 
 const userController = new UserController();
+
+const CosmosClientMock = sinon.createStubInstance(CosmosClient);
+CosmosClientMock.database.callsFake(() => (
+  { container: () => usersCollection } as unknown as Database
+));
 
 describe('User Controller', () => {
   let sandbox: sinon.SinonSandbox;
