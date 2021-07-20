@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "refresh": "rm -rf node_modules package-lock.json && yarn install",
-    "lint": "eslint src/**/*.ts --fix",
     "test": "mocha -r ts-node/register __tests__/*.spec.ts",
     "test:coverage": "nyc --reporter=lcov --reporter=text yarn test"
   },
