@@ -46,6 +46,10 @@ jobs:
 
     - name: Test
       run: yarn test:coverage
+        env:
+          DATABASE_CONNECTION_STRING: 'DATABASE_CONNECTION_STRING'
+          DATABASE_NAME: 'DATABASE_NAME'
+          COLLECTION_NAME: 'DATABASE_NAME'
 
     - name: Codecov
       uses: codecov/codecov-action@v1
